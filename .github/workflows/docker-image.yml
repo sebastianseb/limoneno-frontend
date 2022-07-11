@@ -36,7 +36,7 @@ jobs:
       - name: Snyk SAST
         continue-on-error: true
         run: |
-          pwd
+          cd frontend
           snyk code test
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
