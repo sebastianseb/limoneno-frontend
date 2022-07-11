@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build image
-        run: docker build . --file fronted/Dockerfile --tag ${{ github.sha }}
+        run: docker build . --file frontend/Dockerfile --tag ${{ github.sha }}
       - uses: actions/checkout@master
       - uses: snyk/actions/setup@master
       - uses: actions/setup-go@v1
