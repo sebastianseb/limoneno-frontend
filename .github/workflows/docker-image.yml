@@ -40,5 +40,24 @@ jobs:
           snyk code test
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+  
+  build images:
+    name: Build the Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build image
+        run: docker build . --file fronted/Dockerfile --tag ${{ github.sha }}
+      - name: scan images
+        uses: actions/checkout@master
+        uses: snyk/actions/setup@master
+        uses: actions/setup-go@v1
+        with:
+          go-version: '1.13'
+        continue-on-error: true
+        run: |
+          snyk container ${{ github.sha }} --file=frontend/Dockerfile
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
 #    - name: Build the Docker image
 #      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
