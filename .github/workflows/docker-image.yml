@@ -23,19 +23,20 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - uses: snyk/actions/setup@master
+        continue-on-error: true
       - uses: actions/setup-go@v1
         with:
           go-version: '1.13'
       - name: Snyk SCA
         run: |
           cd frontend
-          ls
           snyk test
-        continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       - name: Snyk SAST
-        run: snyk code test $PWD/frontend
+        run: |
+          pwd
+          snyk code test
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 #    - name: Build the Docker image
