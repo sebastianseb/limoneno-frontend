@@ -26,12 +26,11 @@ jobs:
       - uses: actions/setup-go@v1
         with:
           go-version: '1.13'
-      - name: workspace
-        run: | 
-          pwd
-          ls
       - name: Snyk SCA
-        run: snyk test
+        run: |
+          cd frontend
+          ls
+          snyk test
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       - name: Snyk SAST
