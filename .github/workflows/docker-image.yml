@@ -35,7 +35,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       - name: Snyk SAST
-        run: snyk code
+        run: snyk code test $PWD/frontend
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 #    - name: Build the Docker image
