@@ -45,11 +45,11 @@ jobs:
     name: Build the Docker image
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
       - name: Build image
         run: |
           ls
           docker build . --file $PWD/frontend/Dockerfile --tag ${{ github.sha }}
-      - uses: actions/checkout@master
       - uses: snyk/actions/setup@master
       - uses: actions/setup-go@v1
         with:
