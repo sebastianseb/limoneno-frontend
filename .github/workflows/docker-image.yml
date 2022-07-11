@@ -1,5 +1,4 @@
-name: Docker Image CI
-
+name: build
 on:
   push:
     branches: [ "main" ]
@@ -7,11 +6,9 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   sonarcloud:
-    name: SonarCloud
+    name: Static Code Analysis
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: SonarCloud Scan
@@ -19,5 +16,25 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        
+  Snyk:
+    name: SCA and SAST
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: snyk/actions/setup@master
+      - uses: actions/setup-go@v1
+        with:
+          go-version: '1.13'
+      - name: workspace
+        run: cd frontend
+      - name: Snyk SCA
+        run: snyk test
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      - name: Snyk SAST
+        run: snyk code
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 #    - name: Build the Docker image
 #      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
