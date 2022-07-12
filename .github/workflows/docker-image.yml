@@ -30,14 +30,14 @@ jobs:
         continue-on-error: true
         run: |
           cd frontend
-          snyk test
+          snyk test --all-projects
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       - name: Snyk SAST
         continue-on-error: true
         run: |
           cd frontend
-          snyk code test
+          snyk code test --all-projects
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
   
