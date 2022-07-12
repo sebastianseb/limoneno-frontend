@@ -35,7 +35,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --file=$PWD/frontend
+          args: --file=$pwd/frontend
       #- name: Snyk SAST
         #continue-on-error: true
         #run: |
