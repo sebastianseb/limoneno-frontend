@@ -53,8 +53,8 @@ jobs:
       - uses: actions/setup-go@v1
         with:
           go-version: '1.13'
-        continue-on-error: true
       - name: scan images
+        continue-on-error: true
         run: |
           snyk container test ${{ github.sha }} --file=frontend/Dockerfile
         env:
