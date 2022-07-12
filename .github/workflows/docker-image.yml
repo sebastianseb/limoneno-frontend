@@ -48,7 +48,6 @@ jobs:
       - uses: actions/checkout@master
       - name: Build image
         run: |
-          ls
           docker build . --file $PWD/frontend/Dockerfile --tag ${{ github.sha }}
       - uses: snyk/actions/setup@master
       - uses: actions/setup-go@v1
@@ -57,7 +56,7 @@ jobs:
         continue-on-error: true
       - name: scan images
         run: |
-          snyk container ${{ github.sha }} --file=frontend/Dockerfile
+          snyk container test ${{ github.sha }} --file=frontend/Dockerfile
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
