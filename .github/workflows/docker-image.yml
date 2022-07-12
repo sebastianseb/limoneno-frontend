@@ -21,10 +21,6 @@ jobs:
     name: SCA and SAST
     runs-on: ubuntu-latest
     steps:
-      - name: Snyk SCA
-        continue-on-error: true
-        run: |
-          cd frontend
       - uses: actions/checkout@master
       #- uses: snyk/actions/setup@master
       - uses: snyk/actions/node@master
@@ -32,12 +28,14 @@ jobs:
         #with:
           #go-version: '1.13'
       #- name: Snyk SCA
-        #continue-on-error: true
+        continue-on-error: true
         #run: |
           #cd frontend
-          #snyk test --strict-out-of-sync=false
+          #snyk test
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --file=frontend
       #- name: Snyk SAST
         #continue-on-error: true
         #run: |
