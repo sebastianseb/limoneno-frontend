@@ -30,16 +30,14 @@ jobs:
         continue-on-error: true
         run: |
           cd frontend
-          snyk monitor
-          snyk test
+          snyk test --sarif-file-output=snyk-sarif.json
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       - name: Snyk SAST
         continue-on-error: true
         run: |
           cd frontend
-          snyk monitor
-          snyk code test
+          snyk code test --sarif-file-output=snyk-sarif.json
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
   
