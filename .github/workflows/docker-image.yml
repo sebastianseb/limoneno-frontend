@@ -30,17 +30,25 @@ jobs:
         continue-on-error: true
         run: |
           cd frontend
-          snyk test --sarif-file-output=snyk-sarif.json
+          snyk test --sarif-file-output=snyk-sarif-SCA.json
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      - name: Upload SARIF file SCA
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: snyk-sarif-SCA.json
       - name: Snyk SAST
         continue-on-error: true
         run: |
           cd frontend
-          snyk code test --sarif-file-output=snyk-sarif.json
+          snyk code test --sarif-file-output=snyk-sarif-SAST.json
         env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-  
+         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      - name: Upload SARIF file SAST
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: snyk-sarif-SAST.json
+ 
   build-images:
     name: Build the Docker image
     runs-on: ubuntu-latest
@@ -56,9 +64,10 @@ jobs:
       - name: scan images
         continue-on-error: true
         run: |
-          snyk container test ${{ github.sha }} --file=frontend/Dockerfile
+          snyk container test ${{ github.sha }} --file=frontend/Dockerfile --sarif-file-output=snyk-sarif-container.json
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
-#    - name: Build the Docker image
-#      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - name: Upload SARIF file Container
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: snyk-sarif-container.json
