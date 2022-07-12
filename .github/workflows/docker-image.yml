@@ -30,7 +30,7 @@ jobs:
         continue-on-error: true
         run: |
           cd frontend
-          snyk test --file=package.json
+          snyk test --file=yarn.lock
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       - name: Snyk SAST
