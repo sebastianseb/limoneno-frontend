@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: limoneno-frontend
+  name: limoneno-frontend
+spec:
+  ports:
+  - name: web
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: limoneno-frontend
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: limoneno-frontend
+  name: limoneno-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: limoneno-frontend
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: limoneno-frontend
+    spec:
+      containers:
+        image: harbor-dev.coppel.io/venta-asistida/api-bodegam:6ade9372383a2c4a302532b4280b40e05086ca53
+        name: app
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
