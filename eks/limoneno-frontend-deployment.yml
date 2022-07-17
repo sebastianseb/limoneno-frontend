@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: limoneno-frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: limoneno-frontend
+  template:
+    metadata:
+      labels:
+        app: limoneno-frontend
+    spec:
+      containers:
+      - name: limoneno-frontend
+        image: IMAGE_ECR
+        ports:
+        - containerPort: 80

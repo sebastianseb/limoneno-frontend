@@ -3,6 +3,7 @@ FROM node:10.16.0 as build
 WORKDIR /app
 
 COPY ./frontend /app/
+#COPY ./ /app/
 
 RUN npm install --global yarn
 
