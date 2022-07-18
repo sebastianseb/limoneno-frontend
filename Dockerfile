@@ -11,10 +11,10 @@ RUN yarn install
 
 RUN yarn build
 
-CMD ["yarn", "start"]
+#CMD ["yarn", "start"]
 
-#FROM nginx
+FROM nginx
 
-#COPY --from=build /app/build/ /usr/share/nginx/html
+COPY --from=build /app/build/ /usr/share/nginx/html
 
-#COPY --from=build /app/conf/conf.d/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/conf/conf.d/default.conf /etc/nginx/conf.d/default.conf
