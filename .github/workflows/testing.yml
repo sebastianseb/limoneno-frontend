@@ -20,6 +20,7 @@ jobs:
       uses: mskelton/setup-yarn@v1
       with:
         node-version: '10.16.x'
+    - name: test run
       run: |
         cd frontend
         yarn install
