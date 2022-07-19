@@ -2,7 +2,6 @@
 
 ***LET IA training tool***
 
-
 ## Comienzo
 
 Limoneno herramienta para asistir el proceso de entrenamiento de modelos de machine learning, especificamente relacionado al uso de CNN ***(Convolutional neural networks)***, diseñada para efectuar y gestionar un trabajo colaborativo a la hora de abordar proyectos de entrenamiento y clasificacion de modelos.
