@@ -17,9 +17,9 @@ jobs:
         replacements: 'SONAR_PROJECTKEY=${{ secrets.SONAR_PROJECTKEY }},SONAR_ORGANIZATION=${{ secrets.SONAR_ORGANIZATION }}'
     
     - name: test yarn
-      uses: mskelton/setup-yarn@v1
+      uses: c-hive/gha-yarn-cache@v2
       with:
-        node-version: '10.16.x'
+        directory: frontend
     - name: test run
       run: |
         cd frontend
