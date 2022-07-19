@@ -23,7 +23,6 @@ jobs:
     - name: test run
       run: |
         cd frontend
-        yarn install
         yarn test
 
     - name: SonarCloud Scan
