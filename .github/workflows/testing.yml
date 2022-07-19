@@ -15,16 +15,7 @@ jobs:
       with:
         files: 'sonar-project.properties'
         replacements: 'SONAR_PROJECTKEY=${{ secrets.SONAR_PROJECTKEY }},SONAR_ORGANIZATION=${{ secrets.SONAR_ORGANIZATION }}'
-    
-    - name: test yarn
-      uses: c-hive/gha-yarn-cache@v2
-      with:
-        directory: frontend
-    - name: test run
-      run: |
-        cd frontend
-        yarn test
-
+            
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
       env:
